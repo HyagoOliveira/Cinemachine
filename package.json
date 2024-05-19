@@ -1,22 +1,21 @@
 {
-  "name": "com.actioncode.[packagename]",
-  "displayName": "ActionCode-[PackageName]",
+  "name": "com.actioncode.cinemachine",
+  "displayName": "ActionCode-Cinemachine",
   "version": "0.1.0",
   "unity": "2019.3",
-  "description": "This package contains [...].",
+  "description": "This package contains utility components for Cinemachine.",
   "keywords": [
-    "",
-    ""
+    "Cinemachine"
   ],
   "dependencies": {},
   "license": "MIT",
-  "homepage": "https://github.com/HyagoOliveira/[PACKAGE]#readme",
+  "homepage": "https://github.com/HyagoOliveira/Cinemachine#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/HyagoOliveira/[PACKAGE].git"
+    "url": "https://github.com/HyagoOliveira/Cinemachine.git"
   },
-  "documentationUrl": "https://github.com/HyagoOliveira/[PACKAGE]#readme",
-  "changelogUrl": "https://github.com/HyagoOliveira/[PACKAGE]/CHANGELOG.md",
+  "documentationUrl": "https://github.com/HyagoOliveira/Cinemachine#readme",
+  "changelogUrl": "https://github.com/HyagoOliveira/Cinemachine/CHANGELOG.md",
   "author": {
     "name": "Hyago Oliveira",
     "email": "hyagogow@gmail.com"
