@@ -5,7 +5,7 @@
 * Current version: **0.1.0**
 * License: **MIT**
 * Dependencies:
-	- [com.actioncode.[dependency] : 1.2.3](https://github.com/HyagoOliveira/[dependency]/tree/1.2.3/)
+	- [com.unity.cinemachine: 2.9.7](https://docs.unity3d.com/Packages/com.unity.cinemachine@2.9/changelog/CHANGELOG.html)
 
 ## Summary
 
