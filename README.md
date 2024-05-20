@@ -9,11 +9,35 @@
 
 ## Summary
 
-[...]
+Utility components for Cinemachine.
 
 ## How To Use
 
-### Using [...]
+### Using ImpulseGenerator
+
+When enabled, this component generates an impulse using a local **CinemachineImpulseSource**.
+
+![ImpulseGenerator](Docs~/ImpulseGenerator.png "Impulse Generator")
+
+Use it on explosions or other Game Objects like that.
+
+> Don't forget to attach a **CinemachineImpulseListener** into your VirtualCamera.
+
+### Using FollowAttacher
+
+At Start, this component will attach a **Transform** to be followed by the local VirtualCamera. The transform will be find using a Tag.
+
+![FollowAttacher](Docs~/FollowAttacher.png "Follow Attacher")
+
+### Using Confiner2DCollider
+
+This component facilitates the creation of **PolygonCollider2D** rectangles to be used by **CinemachineConfiner2D**
+
+![Confiner2DCollider](Docs~/Confiner2DCollider.png "Confiner 2D Collider")
+
+On your VirtualCamera, you may use **Confiner2DAttacher** to attaches a Bounding Shape 2D to a local **CinemachineConfiner2D** on Awake.
+
+![Confiner2DAttacher](Docs~/Confiner2DAttacher.png "Confiner 2D Attacher")
 
 ## Installation
 
