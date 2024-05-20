@@ -2,7 +2,7 @@
   "name": "com.actioncode.cinemachine",
   "displayName": "ActionCode-Cinemachine",
   "version": "0.1.0",
-  "unity": "2019.3",
+  "unity": "2022.3",
   "description": "This package contains utility components for Cinemachine.",
   "keywords": [
     "Cinemachine"
