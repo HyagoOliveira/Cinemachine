@@ -29,6 +29,8 @@ namespace ActionCode.Cinemachine
 
             var isRect = collider.GetPath(0).Length == 4;
             if (!isRect) collider.SetPath(0, GetPathFrom(area));
+
+            gameObject.layer = LayerMask.NameToLayer("TransparentFX");
         }
 
         private void OnValidate()
