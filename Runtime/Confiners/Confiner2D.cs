@@ -58,8 +58,11 @@ namespace ActionCode.Cinemachine
             float deltaTime
         )
         {
-            var isInvalidStage = stage != CinemachineCore.Stage.Body;
-            if (isInvalidStage || collider == null) return;
+            var isInvalidStage =
+                stage != CinemachineCore.Stage.Body ||
+                collider == null ||
+                vcam.Follow == null;
+            if (isInvalidStage) return;
 
             CurrentArea = collider.FindArea(vcam.Follow);
 
