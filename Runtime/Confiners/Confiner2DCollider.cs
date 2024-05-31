@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace ActionCode.Cinemachine
 {
@@ -6,113 +7,59 @@ namespace ActionCode.Cinemachine
     /// Facilitates the creation of PolygonCollider2D rectangles.
     /// </summary>
     [DisallowMultipleComponent]
-    [RequireComponent(typeof(PolygonCollider2D))]
     public sealed class Confiner2DCollider : MonoBehaviour
     {
-#pragma warning disable CS0108 // Member hides inherited member; missing new keyword
-        [SerializeField] private PolygonCollider2D collider;
-#pragma warning restore CS0108 // Member hides inherited member; missing new keyword
+        [SerializeField] private List<Rect> areas;
 
-        [Space]
-        [SerializeField] private int index;
-        [SerializeField] private Rect area = defaultArea;
+        //private static readonly Vector2 defaultAreaSize = new(30, 15);
 
-        private static readonly Color outlineColor = new(0.1568628F, 0.9411765F, 0.1490196F);
-        private static readonly Color faceColor = outlineColor * 0.16F;
+        private void Reset() => gameObject.layer = LayerMask.NameToLayer("TransparentFX");
 
-        private int lastIndex = -1;
-        private static readonly Rect defaultArea = new(0, 0, 30, 15);
+        public bool IsEmpty() => areas.Count == 0;
 
-        private void Reset()
+        public void AddArea(Vector2 position, Vector2 size)
         {
-            collider = GetComponent<PolygonCollider2D>();
-            collider.isTrigger = true;
-
-            var isRect = collider.GetPath(0).Length == 4;
-            if (!isRect) collider.SetPath(0, GetPathFrom(area));
-
-            gameObject.layer = LayerMask.NameToLayer("TransparentFX");
+            var area = new Rect(position, size);
+            AddArea(area);
         }
 
-        private void OnValidate()
+        public void AddArea(Rect area) => areas.Add(area);
+
+        public Rect GetArea(int index) => areas[index];
+
+        public Rect FindArea(Transform target)
         {
-            if (collider == null) return;
+            if (IsEmpty() || target == null) return default;
 
-            index = Mathf.Clamp(index, 0, collider.pathCount - 1);
-
-            var hasIndexChanged = index != lastIndex;
-            if (hasIndexChanged) UpdateAreaUsingIndex();
-
-            UpdatePathUsingIndex();
-            lastIndex = index;
-        }
-
-        private void OnDrawGizmosSelected() => DrawEditRectangle();
-
-        public PolygonCollider2D GetCollider() => collider;
-
-        [ContextMenu("Add Area To Right")]
-        public void AddAreaToRight() => AddArea(GetBottomRightPosition(index));
-
-        [ContextMenu("Add Area To Up")]
-        public void AddAreaToUp() => AddArea(GetTopLeftPosition(index));
-
-        public void AddArea(Vector2 position)
-        {
-            var area = defaultArea;
-            area.position = position;
-            TryAddNewPath(GetPathFrom(area));
-        }
-
-        public Vector2 GetBottomRightPosition(int index)
-        {
-            var area = GetRectFrom(collider.GetPath(index));
-            return new Vector2(area.xMax, area.yMin);
-        }
-
-        public Vector2 GetTopLeftPosition(int index)
-        {
-            var area = GetRectFrom(collider.GetPath(index));
-            return new Vector2(area.xMin, area.yMax);
-        }
-
-        private void UpdatePathUsingIndex() => collider.SetPath(index, GetPathFrom(area));
-        private void UpdateAreaUsingIndex() => area = GetRectFrom(collider.GetPath(index));
-
-        private void TryAddNewPath(Vector2[] path)
-        {
-            var newIndex = index + 1;
-            var isInvalidIndex = newIndex > collider.pathCount - 1;
-
-            if (isInvalidIndex)
+            foreach (var area in areas)
             {
-                Debug.LogError($"Cannot add new area since collider has only {collider.pathCount} Path Elements. Increase it manually.");
-                return;
+                if (area.Contains(target.position))
+                    return area;
             }
-            // There isn't any collider.AddPath() and cannot possible to set collider.points property
-            collider.SetPath(newIndex, path);
+
+            // Target is outside from any area.
+            return FindClosestArea(target.position);
         }
 
-        private void DrawEditRectangle()
+        public Rect FindClosestArea(Vector3 position)
         {
-#if UNITY_EDITOR
-            UnityEditor.Handles.DrawSolidRectangleWithOutline(area, faceColor, outlineColor);
-#endif
-        }
+            var closestArea = new Rect();
+            var closestDistance = Mathf.Infinity;
 
-        private static Vector2[] GetPathFrom(Rect area) => new Vector2[4]
-        {
-            area.min,
-            new(area.max.x, area.min.y),
-            area.max,
-            new(area.min.x, area.max.y),
-        };
+            foreach (var area in areas)
+            {
+                var closestPosition = area.ClosestPoint(position);
+                var distance = Vector3.Distance(position, closestPosition);
+                var isClosest = distance < closestDistance;
 
-        private static Rect GetRectFrom(Vector2[] path)
-        {
-            var min = path[0];
-            var max = path[2];
-            return Rect.MinMaxRect(min.x, min.y, max.x, max.y);
+                if (isClosest)
+                {
+                    closestArea = area;
+                    closestDistance = distance;
+                }
+            }
+
+            return closestArea;
         }
     }
 }
