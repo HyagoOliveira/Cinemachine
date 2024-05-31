@@ -1,14 +1,14 @@
 {
   "name": "com.actioncode.cinemachine",
   "displayName": "ActionCode-Cinemachine",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "unity": "2022.3",
   "description": "This package contains utility components for Cinemachine.",
   "keywords": [
     "Cinemachine"
   ],
   "dependencies": {
-    "com.unity.cinemachine": "2.9.7"
+    "com.unity.cinemachine": "2.10.0"
   },
   "license": "MIT",
   "homepage": "https://github.com/HyagoOliveira/Cinemachine#readme",
