@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Changed
+- Increase Unity minimum verson to 2023.3
 - Upgrade Unity Cinemachine package to 3.0.0
 
 ## [1.0.0] - 2024-05-31
