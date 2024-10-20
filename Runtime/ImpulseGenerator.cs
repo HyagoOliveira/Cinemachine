@@ -1,5 +1,5 @@
-using Cinemachine;
 using UnityEngine;
+using Unity.Cinemachine;
 
 namespace ActionCode.Cinemachine
 {

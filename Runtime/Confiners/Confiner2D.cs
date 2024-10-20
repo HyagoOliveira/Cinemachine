@@ -1,6 +1,5 @@
-using Cinemachine;
 using UnityEngine;
-using Cinemachine.Utility;
+using Unity.Cinemachine;
 
 namespace ActionCode.Cinemachine
 {
@@ -49,7 +48,7 @@ namespace ActionCode.Cinemachine
             if (findColliderOnAwake) FindCollider();
         }
 
-        public void FindCollider() => collider = FindObjectOfType<Confiner2DCollider>();
+        public void FindCollider() => collider = FindFirstObjectByType<Confiner2DCollider>();
 
         protected override void PostPipelineStageCallback(
             CinemachineVirtualCameraBase vcam,
@@ -67,7 +66,7 @@ namespace ActionCode.Cinemachine
             CurrentArea = collider.FindArea(vcam.Follow);
 
             var displacement = ConfineScreenEdges(ref state);
-            displacement -= GetTransitionDamping(displacement, deltaTime);
+            displacement -= GetTransitionDamping(vcam.PreviousStateIsValid, displacement, deltaTime);
 
             state.PositionCorrection += displacement;
         }
@@ -76,13 +75,13 @@ namespace ActionCode.Cinemachine
         {
             const int kMaxIter = 12;
 
-            var rot = Quaternion.Inverse(state.CorrectedOrientation);
+            var rot = Quaternion.Inverse(state.OrientationCorrection);
             var dy = mainCamera.orthographicSize;
             var dx = dy * mainCamera.aspect;
             var vx = rot * Vector3.right * dx;
             var vy = rot * Vector3.up * dy;
             var displacement = Vector3.zero;
-            var camPos = state.CorrectedPosition;
+            var camPos = state.PositionCorrection;
             var lastD = Vector3.zero;
 
             for (int i = 0; i < kMaxIter; ++i)
@@ -117,12 +116,12 @@ namespace ActionCode.Cinemachine
             return closest - camPos;
         }
 
-        private Vector3 GetTransitionDamping(Vector3 displacement, float deltaTime)
+        private Vector3 GetTransitionDamping(bool isPreviousStateValid, Vector3 displacement, float deltaTime)
         {
             var prev = previousDisplacement;
             previousDisplacement = displacement;
 
-            if (!VirtualCamera.PreviousStateIsValid || deltaTime < 0 || dampingSpeed <= 0F)
+            if (!isPreviousStateValid || deltaTime < 0 || dampingSpeed <= 0F)
                 return Vector3.zero;
 
             // If a big change from previous frame's desired displacement is detected, 

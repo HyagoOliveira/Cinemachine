@@ -1,5 +1,5 @@
-using Cinemachine;
 using UnityEngine;
+using Unity.Cinemachine;
 
 namespace ActionCode.Cinemachine
 {
@@ -8,14 +8,14 @@ namespace ActionCode.Cinemachine
     /// <para>It will attach a Transform to be followed by the local VirtualCamera.</para>
     /// </summary>
     [DisallowMultipleComponent]
-    [RequireComponent(typeof(CinemachineVirtualCamera))]
+    [RequireComponent(typeof(CinemachineCamera))]
     public sealed class FollowAttacher : MonoBehaviour
     {
-        [SerializeField] private CinemachineVirtualCamera virtualCamera;
+        [SerializeField] private CinemachineCamera virtualCamera;
         [TagField, Tooltip("If set, it'll search and attach the first GameObject with this tag on Start function.")]
         public string tagOnStart = string.Empty;
 
-        private void Reset() => virtualCamera = GetComponent<CinemachineVirtualCamera>();
+        private void Reset() => virtualCamera = GetComponent<CinemachineCamera>();
         private void Start() => Attach(tagOnStart);
 
         /// <summary>
