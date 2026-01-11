@@ -12,11 +12,11 @@ namespace ActionCode.Cinemachine
     public sealed class FollowAttacher : MonoBehaviour
     {
         [SerializeField] private CinemachineCamera virtualCamera;
-        [TagField, Tooltip("If set, it'll search and attach the first GameObject with this tag on Start function.")]
-        public string tagOnStart = string.Empty;
+        [TagField, Tooltip("If set, it'll search and attach the first GameObject with this tag on Awake function.")]
+        public string tagOnAwake = string.Empty;
 
         private void Reset() => virtualCamera = GetComponent<CinemachineCamera>();
-        private void Start() => Attach(tagOnStart);
+        private void Awake() => Attach(tagOnAwake);
 
         /// <summary>
         /// Attaches the given target GameObject to be followed by the VirtualCamera.
