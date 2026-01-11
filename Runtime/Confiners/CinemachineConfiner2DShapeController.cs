@@ -36,6 +36,7 @@ namespace ActionCode.Cinemachine
             }
         }
 
+        private Rect lastArea;
         private PolygonCollider2D boundingShape;
 
         private void Reset()
@@ -58,7 +59,13 @@ namespace ActionCode.Cinemachine
         private void LateUpdate() => CheckNewArea();
 
         public void FindCollider() => collider = FindFirstObjectByType<Confiner2DCollider>();
-        public void UpdateCurrentArea() => CurrentArea = collider.FindArea(virtualCamera.Follow);
+
+        public void UpdateCurrentArea()
+        {
+            var hasFollower = virtualCamera.Follow != null;
+            CurrentArea = hasFollower ? collider.FindArea(virtualCamera.Follow) : lastArea;
+            lastArea = CurrentArea;
+        }
 
         private void CheckNewArea()
         {
