@@ -81,7 +81,7 @@ namespace ActionCode.Cinemachine
             var vx = rot * Vector3.right * dx;
             var vy = rot * Vector3.up * dy;
             var displacement = Vector3.zero;
-            var camPos = state.PositionCorrection;
+            var camPos = state.GetCorrectedPosition();
             var lastD = Vector3.zero;
 
             for (int i = 0; i < kMaxIter; ++i)
