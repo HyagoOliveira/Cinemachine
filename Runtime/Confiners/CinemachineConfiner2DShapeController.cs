@@ -4,13 +4,13 @@ using Unity.Cinemachine;
 namespace ActionCode.Cinemachine
 {
     /// <summary>
-    /// Controls and updates the 2D camera confining shape for a Cinemachine virtual camera 
-    /// based on the current area defined by a Confiner2DCollider.
+    /// Controls and updates a local <see cref="CinemachineConfiner2D.BoundingShape2D"/> 
+    /// based on the Scene <see cref="Confiner2DCollider"/>.
     /// </summary>
     [DisallowMultipleComponent]
     [RequireComponent(typeof(CinemachineCamera))]
     [RequireComponent(typeof(CinemachineConfiner2D))]
-    public sealed class Confiner2DShapeController : MonoBehaviour
+    public sealed class CinemachineConfiner2DShapeController : MonoBehaviour
     {
         [SerializeField] private CinemachineCamera virtualCamera;
         [SerializeField] private CinemachineConfiner2D confiner;

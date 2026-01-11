@@ -9,14 +9,14 @@ namespace ActionCode.Cinemachine
     [DisallowMultipleComponent]
     public sealed class Confiner2DCollider : MonoBehaviour
     {
-        [field: SerializeField] public PolygonCollider2D CurrentBounds { get; internal set; }
+        [field: SerializeField, ContextMenuItem("Setup", nameof(SetupCurrentBounds))]
+        public PolygonCollider2D CurrentBounds { get; internal set; }
         public List<Rect> areas = new();
 
         private void Reset()
         {
             CreateFirstArea();
             SetupCurrentBounds();
-            UpdateCurrentBounds(areas[0]);
         }
 
         public bool IsEmpty() => areas.Count == 0;
@@ -84,6 +84,11 @@ namespace ActionCode.Cinemachine
         {
             CurrentBounds = GetOrCreateCurrentBounds();
             CurrentBounds.gameObject.layer = LayerMask.NameToLayer("TransparentFX");
+            UpdateCurrentBounds(areas[0]);
+
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(gameObject);
+#endif
         }
 
         public void UpdateCurrentBounds(Rect area) => CurrentBounds.points = new Vector2[4]
