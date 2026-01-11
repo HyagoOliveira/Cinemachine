@@ -34,6 +34,7 @@ namespace ActionCode.Cinemachine
             set => dampingSpeed = Mathf.Clamp(value, 0F, maxDampingSpeed);
         }
 
+        private Rect lastArea;
         private Camera mainCamera;
         private Vector3 dampedDisplacement;
         private Vector3 previousDisplacement;
@@ -59,16 +60,17 @@ namespace ActionCode.Cinemachine
         {
             var isInvalidStage =
                 stage != CinemachineCore.Stage.Body ||
-                collider == null ||
-                vcam.Follow == null;
+                collider == null;
             if (isInvalidStage) return;
 
-            CurrentArea = collider.FindArea(vcam.Follow);
+            var hasFollower = vcam.Follow != null;
+            CurrentArea = hasFollower ? collider.FindArea(vcam.Follow) : lastArea;
 
             var displacement = ConfineScreenEdges(ref state);
             displacement -= GetTransitionDamping(vcam.PreviousStateIsValid, displacement, deltaTime);
 
             state.PositionCorrection += displacement;
+            lastArea = CurrentArea;
         }
 
         private Vector3 ConfineScreenEdges(ref CameraState state)

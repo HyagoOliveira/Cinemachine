@@ -39,7 +39,7 @@ namespace ActionCode.Cinemachine
 
         public Rect FindArea(Transform target)
         {
-            if (IsEmpty() || target == null) return areas[0];
+            if (IsEmpty() || target == null) return default;
 
             foreach (var area in areas)
             {
