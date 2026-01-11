@@ -35,9 +35,11 @@ Creates and edits Rectangle Areas in your Scene.
 
 ![Confiner2DCollider](Docs~/Confiner2DCollider.png "Confiner 2D Collider")
 
-On your Cinemachine Camera component, add the **Confiner2D** extention, making sure Find Collider On Awake is enabled.
+On your Cinemachine Camera component, add the **Confiner2D** extension, making sure **Find Collider On Awake** is enabled.
 
-If you are creating a 3D game, use the CinemachineConfiner2DShapeController with CinemachineConfiner2D components.
+![Confiner2DExtension](Docs~/Confiner2DExtension.png "Confiner 2D Extension")
+
+If you are creating a 3D game, use the **CinemachineConfiner2DShapeController** component with **CinemachineConfiner2D**.
 
 ![CinemachineConfiner2DShapeController](Docs~/CinemachineConfiner2DShapeController.png "Cinemachine Confiner 2D Shape Controller")
 
