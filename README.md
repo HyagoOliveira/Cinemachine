@@ -5,7 +5,7 @@
 * Current version: **1.0.0**
 * License: **MIT**
 * Dependencies:
-	- [com.unity.cinemachine: 3.0.0](https://docs.unity3d.com/Packages/com.unity.cinemachine@3.1/changelog/CHANGELOG.html#300---2023-10-25)
+	- [com.unity.cinemachine: 3.1.5](https://docs.unity3d.com/Packages/com.unity.cinemachine@3.1/changelog/CHANGELOG.html#315---2025-10-21)
 
 ## Summary
 

@@ -8,7 +8,7 @@
     "Cinemachine"
   ],
   "dependencies": {
-    "com.unity.cinemachine": "3.0.0"
+    "com.unity.cinemachine": "3.1.5"
   },
   "license": "MIT",
   "homepage": "https://github.com/HyagoOliveira/Cinemachine#readme",
