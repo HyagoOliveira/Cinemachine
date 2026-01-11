@@ -5,8 +5,8 @@ namespace ActionCode.Cinemachine
 {
     /// <summary>
     /// Follow Attacher for Cinemachine.
-    /// <para>It will attach a Transform to be followed by the local VirtualCamera.</para>
     /// </summary>
+    /// <remarks>Attaches a Transform to be followed by the local VirtualCamera.</remarks>
     [DisallowMultipleComponent]
     [RequireComponent(typeof(CinemachineCamera))]
     public sealed class FollowAttacher : MonoBehaviour
@@ -36,10 +36,10 @@ namespace ActionCode.Cinemachine
         /// <param name="tag">A Tag to search for a GameObject.</param>
         public void Attach(string tag)
         {
-            var invalidTag = tag.Length == 0;
+            var invalidTag = string.IsNullOrEmpty(tag);
             if (invalidTag) return;
 
-            var target = GameObject.FindWithTag(tagOnStart);
+            var target = GameObject.FindWithTag(tag);
             if (target) Attach(target);
         }
     }
