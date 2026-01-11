@@ -42,5 +42,10 @@ namespace ActionCode.Cinemachine
             var target = GameObject.FindWithTag(tag);
             if (target) Attach(target);
         }
+
+        /// <summary>
+        /// Detaches the current follower.
+        /// </summary>
+        public void Detach() => virtualCamera.Follow = null;
     }
 }
