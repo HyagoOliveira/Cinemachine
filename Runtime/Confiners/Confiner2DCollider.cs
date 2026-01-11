@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace ActionCode.Cinemachine
 {
     /// <summary>
-    /// Facilitates the creation of PolygonCollider2D rectangles.
+    /// Creates and edits Rectangle Areas in your Scene.
     /// </summary>
     [DisallowMultipleComponent]
     public sealed class Confiner2DCollider : MonoBehaviour

@@ -25,19 +25,21 @@ Use it on explosions or other Game Objects like that.
 
 ### Using FollowAttacher
 
-At Start, this component will attach a **Transform** to be followed by the local VirtualCamera. The transform will be find using a Tag.
+At Awake, this component will attach a **Transform** to be followed by the local Cinemachine Camera. The transform will be find using a Tag.
 
 ![FollowAttacher](Docs~/FollowAttacher.png "Follow Attacher")
 
 ### Using Confiner2DCollider
 
-This component facilitates the creation of **PolygonCollider2D** rectangles to be used by **CinemachineConfiner2D**
+Creates and edits Rectangle Areas in your Scene.
 
 ![Confiner2DCollider](Docs~/Confiner2DCollider.png "Confiner 2D Collider")
 
-On your VirtualCamera, you may use **Confiner2DAttacher** to attaches a Bounding Shape 2D to a local **CinemachineConfiner2D** on Awake.
+On your Cinemachine Camera component, add the **Confiner2D** extention, making sure Find Collider On Awake is enabled.
 
-![Confiner2DAttacher](Docs~/Confiner2DAttacher.png "Confiner 2D Attacher")
+If you are creating a 3D game, use the CinemachineConfiner2DShapeController with CinemachineConfiner2D components.
+
+![CinemachineConfiner2DShapeController](Docs~/CinemachineConfiner2DShapeController.png "Cinemachine Confiner 2D Shape Controller")
 
 ## Installation
 
