@@ -9,7 +9,7 @@ namespace ActionCode.Cinemachine
     [DisallowMultipleComponent]
     public sealed class Confiner2DCollider : MonoBehaviour
     {
-        public List<Rect> areas;
+        public List<Rect> areas = new();
 
         private void Reset()
         {
