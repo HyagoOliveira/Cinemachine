@@ -1,7 +1,7 @@
 # Cinemachine
 
 * Utility components for Cinemachine.
-* Unity minimum version: **6000.1**
+* Unity minimum version: **6000.3**
 * Current version: **2.0.0**
 * License: **MIT**
 * Dependencies:

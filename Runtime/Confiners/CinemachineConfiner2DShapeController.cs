@@ -1,5 +1,5 @@
-using UnityEngine;
 using Unity.Cinemachine;
+using UnityEngine;
 
 namespace ActionCode.Cinemachine
 {
@@ -58,7 +58,7 @@ namespace ActionCode.Cinemachine
 
         private void LateUpdate() => CheckNewArea();
 
-        public void FindCollider() => collider = FindFirstObjectByType<Confiner2DCollider>();
+        public void FindCollider() => collider = FindAnyObjectByType<Confiner2DCollider>();
 
         public void UpdateCurrentArea()
         {

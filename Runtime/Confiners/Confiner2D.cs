@@ -1,5 +1,5 @@
-using UnityEngine;
 using Unity.Cinemachine;
+using UnityEngine;
 
 namespace ActionCode.Cinemachine
 {
@@ -49,7 +49,7 @@ namespace ActionCode.Cinemachine
             if (findColliderOnAwake) FindCollider();
         }
 
-        public void FindCollider() => collider = FindFirstObjectByType<Confiner2DCollider>();
+        public void FindCollider() => collider = FindAnyObjectByType<Confiner2DCollider>();
 
         protected override void PostPipelineStageCallback(
             CinemachineVirtualCameraBase vcam,
