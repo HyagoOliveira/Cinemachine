@@ -1,5 +1,6 @@
-using UnityEngine;
 using System.Collections.Generic;
+using Unity.Cinemachine;
+using UnityEngine;
 
 namespace ActionCode.Cinemachine
 {
@@ -12,6 +13,8 @@ namespace ActionCode.Cinemachine
         [field: SerializeField, ContextMenuItem("Setup", nameof(SetupCurrentBounds))]
         public PolygonCollider2D CurrentBounds { get; internal set; }
         public List<Rect> areas = new();
+
+        public static readonly Vector2 skin = Vector2.one * -0.12f;
 
         private void Reset()
         {
@@ -44,11 +47,11 @@ namespace ActionCode.Cinemachine
             foreach (var area in areas)
             {
                 if (area.Contains(target.position))
-                    return area;
+                    return area.Inflated(skin);
             }
 
             // Target is outside from any area.
-            return FindClosestArea(target.position);
+            return FindClosestArea(target.position).Inflated(skin);
         }
 
         public Rect FindClosestArea(Vector3 position)
@@ -113,5 +116,6 @@ namespace ActionCode.Cinemachine
             var hasCollider = instance.TryGetComponent(out PolygonCollider2D polyCollider);
             return hasCollider ? polyCollider : instance.gameObject.AddComponent<PolygonCollider2D>();
         }
+
     }
 }

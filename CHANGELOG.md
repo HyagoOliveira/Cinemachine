@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 - Update to Unity 6000.3
 
+### Fixed
+- Confiner2DCollider area
+
 ## [2.0.0] - 2026-01-11
 ### Added
 - CinemachineConfiner2DShapeController
