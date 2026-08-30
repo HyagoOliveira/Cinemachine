@@ -10,17 +10,11 @@ namespace ActionCode.Cinemachine
     [DisallowMultipleComponent]
     public sealed class Confiner2DCollider : MonoBehaviour
     {
-        [field: SerializeField, ContextMenuItem("Setup", nameof(SetupCurrentBounds))]
-        public PolygonCollider2D CurrentBounds { get; internal set; }
         public List<Rect> areas = new();
 
         public static readonly Vector2 skin = Vector2.one * -0.12f;
 
-        private void Reset()
-        {
-            CreateFirstArea();
-            SetupCurrentBounds();
-        }
+        private void Reset() => CreateFirstArea();
 
         public bool IsEmpty() => areas.Count == 0;
 
@@ -82,40 +76,5 @@ namespace ActionCode.Cinemachine
             var area = new Rect(position: Vector2.zero, size: new Vector2(30f, 15f));
             areas.Add(area);
         }
-
-        public void SetupCurrentBounds()
-        {
-            CurrentBounds = GetOrCreateCurrentBounds();
-            CurrentBounds.gameObject.layer = LayerMask.NameToLayer("TransparentFX");
-            UpdateCurrentBounds(areas[0]);
-
-#if UNITY_EDITOR
-            UnityEditor.EditorUtility.SetDirty(gameObject);
-#endif
-        }
-
-        public void UpdateCurrentBounds(Rect area) => CurrentBounds.points = new Vector2[4]
-        {
-            area.BottomLeft(),
-            area.BottomRight(),
-            area.TopRight(),
-            area.TopLeft()
-        };
-
-        private PolygonCollider2D GetOrCreateCurrentBounds()
-        {
-            const string name = "CurrentBounds";
-
-            var instance = transform.Find(name);
-            if (instance == null)
-            {
-                instance = new GameObject(name).transform;
-                instance.SetParent(transform);
-            }
-
-            var hasCollider = instance.TryGetComponent(out PolygonCollider2D polyCollider);
-            return hasCollider ? polyCollider : instance.gameObject.AddComponent<PolygonCollider2D>();
-        }
-
     }
 }
